@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Experience at KJSCE Hack 4.O"
-feature_image: "../../../../eureka3.jpg"
+feature_image: "../../../../../assets/img/eureka3.jpg"
 date:   2019-10-08 17:46:01 +0530
 categories: Experience
 ---
@@ -26,8 +26,8 @@ Our product Hospipro included features like:
 * Patients can also have access to there medical history
 
 ***Screenshots***
-![](../../../../home.png)
-![](../../../../login.png)
+![](../../../../../assets/img/home.png)
+![](../../../../../assets/img/login.png)
 
 
 During the Hackathon I learned that most of the team where using new technology Flask , Django , MongoDB for the backend. during the judging round I learned the techniques to Pitch your Ideas to someone else. I would like to suggest to the people who are going to participate in their first hackathon to make some pre preparation regarding the idea and how you are going to execute.
@@ -36,6 +36,6 @@ During the Hackathon I learned that most of the team where using new technology 
 
 **Pics during Hackathon**
 
-![](../../../../myself2.jpg)
-![](../../../../feature.jpg)
-![](../../../../image2.jpeg)
+![](../../../../../assets/img/myself2.jpg)
+![](../../../../../assets/img/feature.jpg)
+![](../../../../../assets/img/image2.jpeg)
