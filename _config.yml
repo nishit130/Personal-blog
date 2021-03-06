@@ -53,6 +53,13 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+facebook_url: 
+twitter_url: "https://twitter.com/nishit130"
+linkedin_url: "https://www.linkedin.com/in/nishit-patel-45a8b0136/"
+googleplus_url:
+pinterest_url:
+instagram_url:
+
 navigation_header:
   Home: /
   About: /about/
