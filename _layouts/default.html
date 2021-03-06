@@ -19,13 +19,13 @@
     {% else %}
     {% endif %}
 
-    <link rel="manifest" href="{{ 'manifest.json' | absolute_url }}">
+    <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
     <meta name="theme-color" content="{{ site.manifest.theme_color | default: '#242e2b' }}"/>
 
     {% if site.css_inline == true %}
       {% include site-styles.html %}
     {% else %}
-      <link rel="stylesheet" href="{{ 'assets/styles.css' | absolute_url }}">
+      <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
     {% endif %}
 
     {% if site.favicons or site.avatarurl %}{% include site-favicons.html %}{% endif %}
