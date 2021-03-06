@@ -30,7 +30,7 @@ twitter_username: nishit130
 github_username:  nis130
 
 # Build settings
-# theme: alembic-jekyll-theme
+theme: alembic-jekyll-theme
 plugins:
   - jekyll-feed
 
@@ -71,5 +71,3 @@ collections:
     description: "My thoughts and ideas" # The post list page content
     feature_text: Blog Post's
     feature_image: "https://picsum.photos/1300/400?image=989"
-
-theme: jekyll-theme-cayman
