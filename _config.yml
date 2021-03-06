@@ -30,7 +30,7 @@ twitter_username: nishit130
 github_username:  nis130
 
 # Build settings
-# theme: alembic-jekyll-theme
+theme: alembic-jekyll-theme
 plugins:
   - jekyll-feed
 
