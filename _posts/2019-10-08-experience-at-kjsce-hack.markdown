@@ -37,6 +37,5 @@ During the Hackathon, I learned that most of the team were using new technology 
 
 **Images taken during Hackathon**
 
-![](../../../../assets/img/myself2.jpg)
 ![](../../../../assets/img/feature.jpg)
 ![](../../../../assets/img/image2.jpeg)

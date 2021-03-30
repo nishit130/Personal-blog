@@ -1,33 +1,16 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you: 
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
 title: Nishit Patel
 email: nishitlimbani130@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
-baseurl: "/Personal-blog" # the subpath of your site, e.g. /blog
-url: "https://nis130.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "http://www.nishitpatel.tech" # the base hostname & protocol for your site, e.g. http://example.com
+disqus: "blog-iiu4zzvb3v"
 twitter_username: nishit130
 github_username:  nis130
+
+google_analytics: "UA-150355837-1"
 
 # Build settings
 # theme: alembic-jekyll-theme
@@ -55,21 +38,39 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-facebook_url: 
+
+
+encoding: utf-8 # Make sure the encoding is right
+lang: en-IN # Set the site language
+title: "Nishit Patel" # Site name or title, also used in jekyll-seo-tag
+description: "Portfolio webstie of Nishit Patel" # Site description and default description, also used in jekyll-seo-tag
 twitter_url: "https://twitter.com/nishit130"
 linkedin_url: "https://www.linkedin.com/in/nishit-patel-45a8b0136/"
-googleplus_url:
-pinterest_url:
-instagram_url:
+
+social_links: # Appears in sidebar. Set the urls then uncomment and comment out as desired
+  Twitter: https://twitter.com/DavidDarnes
+  LinkedIn: https://www.linkedin.com/in/daviddarnes
+  GitHub: https://github.com/daviddarnes
+  link: https://darn.es
+  RSS: /feed.xml
 
 navigation_header:
-  Home: /
-  About: /about/
-  Blog: /blog/
+- title: Home
+  url: /
+- title: About
+  url: /about/
+- title: Blog
+  url: /blog/
 collections:
   posts:
-    title: Posts # Needed for Siteleaf
+    title: Blog # Needed for Siteleaf
     output: true
     description: "My thoughts and ideas" # The post list page content
     feature_text: Blog Post's
     feature_image: "https://picsum.photos/1300/400?image=989"
+
+
+sharing_links: # Appear at the bottom of single blog posts, add as desired. The value can be 'true' or the desired button colour
+  Twitter: "#0d94e7"
+  facebook: "#3B5998"
+  Email: true
