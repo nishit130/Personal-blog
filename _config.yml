@@ -58,9 +58,9 @@ navigation_header:
 - title: Home
   url: /
 - title: About
-  url: /about/
+  url: /about
 - title: Blog
-  url: /blog/
+  url: /blog
 collections:
   posts:
     title: Blog # Needed for Siteleaf
