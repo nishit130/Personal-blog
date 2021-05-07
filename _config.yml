@@ -48,10 +48,9 @@ twitter_url: "https://twitter.com/nishit130"
 linkedin_url: "https://www.linkedin.com/in/nishit-patel-45a8b0136/"
 
 social_links: # Appears in sidebar. Set the urls then uncomment and comment out as desired
-  Twitter: https://twitter.com/DavidDarnes
-  LinkedIn: https://www.linkedin.com/in/daviddarnes
-  GitHub: https://github.com/daviddarnes
-  link: https://darn.es
+  Twitter: https://twitter.com/nishit130
+  LinkedIn: https://www.linkedin.com/in/nishit-patel-45a8b0136/
+  GitHub: https://github.com/nis130
   RSS: /feed.xml
 
 navigation_header:
@@ -66,6 +65,10 @@ collections:
     description: "My thoughts and ideas" # The post list page content
     feature_text: Blog Post's
     feature_image: "https://picsum.photos/1300/400?image=989"
+
+navigation_footer:
+- title: Blog
+  url: /blog
 
 
 sharing_links: # Appear at the bottom of single blog posts, add as desired. The value can be 'true' or the desired button colour
