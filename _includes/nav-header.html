@@ -12,12 +12,18 @@
       <li class="item  item--nav{% if item.url == page.url %}  item--current{% endif %}">
         <a href="{{ url }}">{{ item.title }}</a>
       </li>
+
     {% endfor %}
   </ul>
+
+
   <button class="button  button--nav" aria-label="Menu toggle">
     {% include icon.html id="nav" title="Menu" %}
   </button>
 </nav>
+   <span class="togle" style="float: right;display: inline;">
+    {% include theme-toggle-button.html %}
+    </span>
 {% else %}
   {% include nav-default.html %}
 {% endif %}

@@ -36,18 +36,10 @@ a {
 
   // Nice underlines for text links.
   p a, li a {
-    background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0) 50%,$linkColour 50%);
-    background-position: 0 93%;
-    background-repeat: repeat-x;
-    background-size: 100% 0.15rem;
-    text-shadow: 0.1rem 0 $backgroundColour,
-                 0.15rem 0 $backgroundColour,
-                -0.1rem 0 $backgroundColour,
-                -0.15rem 0 $backgroundColour;
-
-    &:hover, &:active, &:focus {
-      background-image: linear-gradient(to bottom,rgba(0, 0, 0, 0) 50%,$hoverColour 50%);
-    }
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    -webkit-text-decoration-skip: ink;
+    text-decoration-skip: ink;
   }
 
   // Paragraphs. OpenType ligatures and oldstyle figures enabled if available.
@@ -58,13 +50,7 @@ a {
   }
 
   // Headings. OpenType ligatures, discretionary ligatures and lining figures enabled if available.
-  h1, h2, h3, h4, h5, h6 {
-    color: $headingColour;
-    font-family: unquote(map-get($headingtype, font-family));
-    font-feature-settings: 'dlig', 'liga', 'lnum', 'kern';
-    font-style: normal;
-    font-weight: map-get($headingtype, bold);
-  }
+
 
   // Heading level 1.
   h1, .alpha {
@@ -254,7 +240,7 @@ a {
   .caption {
     @include baseline(theta, $headingtype, 2, 2, all);
 
-    color: $captionColour;
+    color: var(--caption);
   }
 
   // Nice spacing for captions.

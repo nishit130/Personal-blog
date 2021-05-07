@@ -1,7 +1,38 @@
 // Structural elements
+html {
+    --bg: #FFF;
+    --bg-secondary: #f8f8f8;
+    --headings: #242e2b;
+    --text: #384743;
+    --links: #05bf85;
+    --highlight: #FFECB2; // light yellow
+    --code-text: #9D174D;
+    --share-text: #999;
+    --caption: #a8adac;
+}
+
+@mixin dark-appearance {
+  html, body  {
+      --headings: #05bf85;
+      --links: #05bf85;
+      --highlight: #41C7C7;
+      --bg: #1f242A;
+      --bg-secondary: #323945;
+      --text: #adb5bd;
+      --code-text: #91A7FF;
+      --share-text: #C4C4C4;
+      --caption: #f8fcfb;
+  };
+}
+html[data-theme="dark"] { @include dark-appearance; }
+
+@media (prefers-color-scheme: dark) {
+  body[data-theme="auto"] { @include dark-appearance; }
+}
+
 body {
-  background: $backgroundColour;
-  color: $bodyColour;
+  background: var(--bg);
+  color: var(--text);
   height: 100%;
   display: flex;
   @include flex-direction(column);
@@ -47,7 +78,7 @@ body {
   padding-bottom: .4rem;
   margin-bottom: 1.6rem;
   text-align: center;
-  background: $featureBackgroundColour;
+  background: var(--bg);
   background-size: cover;
   background-position: center;
   .container {
@@ -79,19 +110,27 @@ body {
   }
 }
 
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--headings);
+    font-family: unquote(map-get($headingtype, font-family));
+    font-feature-settings: 'dlig', 'liga', 'lnum', 'kern';
+    font-style: normal;
+    font-weight: map-get($headingtype, bold);
+  }
+
 .small {
   padding-top: .8rem;
-  color: $captionColour;
+  color: var(--caption);
   display: inline-block;
 }
 
 .footer {
-  background: $headingColour;
-  color: $captionColour;
+  background: var(--headings);
+  color: var(--caption);
   a {
-    color: $captionColour;
+    color: var(--caption);
     &:hover {
-      color: $backgroundColour;
+      color: var(--bg);
     }
   }
   .container {
@@ -107,7 +146,7 @@ body {
 .nav--paginator {
   @include flexbox;
   @include justify-content(space-between);
-  color: $captionColour;
+  color: var(--text);
   text-align: center;
 }
 
@@ -198,7 +237,7 @@ body {
   }
   &--current {
     a {
-      color: $captionColour;
+      color: var(--text);
     }
   }
 }
@@ -278,7 +317,7 @@ video {
   position: relative;
   &__legend {
     font-style: italic;
-    color: $captionColour;
+    color: var(--caption);
     position: absolute;
     overflow: hidden;
     right: 0;
@@ -318,12 +357,8 @@ button,
   transition: box-shadow .1s;
   will-change: box-shadow;
   box-shadow: inset 0 0 0 2rem transparent;
-  &:hover {
-    box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.25);
-  }
-  &:active,
-  &:focus {
-    box-shadow: inset 0 0 0 2rem rgba(0,0,0,0.25);
+  &:hover, &:focus {
+    outline: none;
   }
 }
 
@@ -343,18 +378,7 @@ button,
   }
 }
 
-a,
-button,
-.button,
-input,
-textarea,
-select {
-  &:focus,
-  &:hover:focus {
-    outline: solid .12rem $focusColour;
-    outline-offset: -.12rem;
-  }
-}
+
 
 a:hover:focus {
   outline: none;
@@ -385,9 +409,18 @@ label {
   @include baseline($fontsize: zeta, $font: $bodytype, $lineheight: 2, $below: 2, $breakpoint: all);
 }
 
+.togle {
+  color: var(--headings);
+  background-color: var(--bg);
+  &:hover, &:focus {
+    outline: none;
+  }
+
+}
+
 code {
   padding: .12rem .2rem;
-  color: $headingColour;
+  color: var(--headings);
 }
 
 pre code {

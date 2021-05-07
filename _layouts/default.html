@@ -37,11 +37,11 @@
 
   <body class="layout-{{ page.layout }}{% if page.title %}  {{ page.title | slugify }}{% endif %}">
     {% include site-icons.svg %}
-
     {{ content }}
 
     {% if site.service_worker != false %}{% include site-sw.html %}{% endif %}
 
+    {% include toggle-theme-js.html %}
     {% include site-before-end.html %}
   </body>
 

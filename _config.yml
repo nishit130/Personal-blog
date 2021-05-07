@@ -57,8 +57,6 @@ social_links: # Appears in sidebar. Set the urls then uncomment and comment out 
 navigation_header:
 - title: Home
   url: /
-- title: About
-  url: /about
 - title: Blog
   url: /blog
 collections:

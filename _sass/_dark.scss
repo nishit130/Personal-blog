@@ -1,0 +1,47 @@
+$darkBackgroundColour: #000000 !default;
+$codeBackgroundColour: #fafafa !default;
+$featureBackgroundColour: #f9fafa !default;
+$accentColour: #05bf85 !default;
+
+// Text colours
+$darkHeadingColour: #b9ccba !default;
+$darkBodyColour: #ffffcc !default;
+$linkColour: #05bf85 !default;
+$hoverColour: #008000 !default;
+$focusColour: #fa407a !default;
+$captionColour: #a8adac !default;
+$white: #ffffff !default;
+
+
+
+@mixin dark-appearance {
+  html, body  {
+      --headings: #74c0fc;
+      --links: #91A7FF;
+      --highlight: #41C7C7;
+      --bg: #1f242A;
+      --bg-secondary: #323945;
+      --text: #adb5bd;
+      --code-text: #91A7FF;
+      --share-text: #C4C4C4;
+  };
+}
+html[data-theme="dark"] { @include dark-appearance; }
+body {
+  background: $darkBackgroundColour;
+  color: $darkBodyColour;
+  height: 100%;
+  display: flex;
+  @include flex-direction(column);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $darkHeadingColour !important;
+    font-family: unquote(map-get($headingtype, font-family));
+    font-feature-settings: 'dlig', 'liga', 'lnum', 'kern';
+    font-style: normal;
+    font-weight: map-get($headingtype, bold);
+  }
+
+
