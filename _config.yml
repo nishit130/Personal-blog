@@ -17,6 +17,7 @@ google_analytics: "UA-150355837-1"
 # remote_theme: daviddarnes/alembic
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
   # - jekyll-remote-theme
 
 # Exclude from processing.
