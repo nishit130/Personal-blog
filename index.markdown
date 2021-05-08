@@ -7,6 +7,3 @@
 # excerpt: "This is my blog page where i would be sharing my expericence of participation in various programming competitions and new technology i learn"
 layout: index
 ---
-
-DEV IS WORKING ON THIS  
-COMMING SOON...
