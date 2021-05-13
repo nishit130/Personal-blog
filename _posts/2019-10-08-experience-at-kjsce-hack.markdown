@@ -5,6 +5,7 @@ feature_image: "../../../../assets/img/eureka3.jpg"
 date:   2019-10-08 17:46:01 +0530
 comments: True
 categories: Experience
+collectionpage: kjsce-hack
 ---
 In this blog, I will share my experience at KJCE Hackathon 2019. first, let me explain to you what is a hackathon and if you already know than skip the next 6-7 lines.
 

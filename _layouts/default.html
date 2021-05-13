@@ -9,13 +9,34 @@
       <meta name="robots" content="noindex">
     {% endif %}
 
-    {% if page.collectionpage %}
+    {% if page.collectionpage != "posts" %}
+      {% assign collectiondata = site.collections | where: "label", page.collectionpage | first %}
+      <title>{{ collectiondata.title }} - {{ site.title }}</title>
+      <meta property="og:title" content="{{ collectiondata.title }}">
+      <meta name="description" content="{{ collectiondata.description }}">
+      <meta property="og:description" content="{{ collectiondata.description }}">
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "{{collectiondata.title}}",
+        "image": [
+          "https://www.nishitpatel.tech/assets/img/feature.jpg"
+        ],
+        "datePublished": "{{page.date}}",
+        "dateModified": "{{page.date}}"
+      }
+      </script>
+
+
+    {% elsif page.collectionpage %}
 
       {% assign collectiondata = site.collections | where: "label", page.collectionpage | first %}
       <title>{{ collectiondata.title }} - {{ site.title }}</title>
       <meta property="og:title" content="{{ collectiondata.title }}">
       <meta name="description" content="{{ collectiondata.description }}">
       <meta property="og:description" content="{{ collectiondata.description }}">
+
     {% else %}
       <title>Nishit Patel</title>
     {% endif %}

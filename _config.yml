@@ -1,9 +1,8 @@
 title: Nishit Patel
 email: nishitlimbani130@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Portfolio and blog website of Nishit Patel.
+  programmer and open source contributor.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://www.nishitpatel.tech" # the base hostname & protocol for your site, e.g. http://example.com
 disqus: "blog-iiu4zzvb3v"
@@ -44,7 +43,7 @@ plugins:
 encoding: utf-8 # Make sure the encoding is right
 lang: en-IN # Set the site language
 title: "Nishit Patel" # Site name or title, also used in jekyll-seo-tag
-description: "Portfolio webstie of Nishit Patel" # Site description and default description, also used in jekyll-seo-tag
+description: "Portfolio webstie of Nishit Patel | Programmer" # Site description and default description, also used in jekyll-seo-tag
 twitter_url: "https://twitter.com/nishit130"
 linkedin_url: "https://www.linkedin.com/in/nishit-patel-45a8b0136/"
 
@@ -59,13 +58,21 @@ navigation_header:
   url: /
 - title: Blog
   url: /blog
+
 collections:
   posts:
     title: Blog # Needed for Siteleaf
     output: true
-    description: "My thoughts and ideas" # The post list page content
+    description: "Bloging page | Nishit patel blogs | programming blogs" # The post list page content
     feature_text: Blog Post's
     feature_image: "https://picsum.photos/1300/400?image=989"
+  kjsce-hack:
+    title: KJSCE Hack Experience
+    output: true
+    description: "Written by Nishit Patel, KJSCE HACK 5.0 Experience, First hackathon blog"
+    feature_image: "../../../../assets/img/eureka3.jpg"
+  
+  
 
 navigation_footer:
 - title: Blog
