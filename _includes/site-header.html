@@ -5,6 +5,6 @@
     {% include nav-header.html %}
   </div>
 
-  {% include site-feature.html %}
+  {% if page.feature %}{% include site-feature.html %}{% endif %}
 
 </header>

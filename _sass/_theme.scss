@@ -2,13 +2,15 @@
 html {
     --bg: #FFF;
     --bg-secondary: #f8f8f8;
-    --headings: #242e2b;
+    --headings: #05bf85;
     --text: #384743;
     --links: #05bf85;
     --highlight: #FFECB2; // light yellow
     --code-text: #9D174D;
     --share-text: #999;
-    --caption: #a8adac;
+    --caption: #1a1b1b;
+    --hoverColour: #175042;
+
 }
 
 @mixin dark-appearance {
@@ -22,6 +24,8 @@ html {
       --code-text: #91A7FF;
       --share-text: #C4C4C4;
       --caption: #f8fcfb;
+      --hoverColour: #94ecb9;
+
   };
 }
 html[data-theme="dark"] { @include dark-appearance; }
@@ -45,6 +49,17 @@ body {
   margin: 0 auto;
 }
 
+// Links.
+a {
+  color: $linkColour;
+  text-decoration: none;
+  transition: color .1s, background-color .1s;
+
+  &:hover, &:active, &:focus {
+    color: var(--hoverColour);
+    text-decoration: none;
+  }
+}
 
 // Header, feature and footer
 .header,
@@ -80,9 +95,10 @@ body {
   text-align: center;
   background: var(--bg);
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
   .container {
-    min-height: 35vh;
+    min-height: 45vh;
     max-width: 60%;
     @include flex-direction(column);
     @include justify-content(center);
@@ -374,7 +390,7 @@ button,
   &:hover,
   &:focus {
     box-shadow: none;
-    color: $hoverColour;
+    color: var(--hoverColour);
   }
 }
 

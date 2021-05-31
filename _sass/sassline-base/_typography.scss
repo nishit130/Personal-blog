@@ -19,17 +19,7 @@ body {
   line-height: 2rem;
 }
 
-// Links.
-a {
-  color: $linkColour;
-  text-decoration: none;
-  transition: color .1s, background-color .1s;
 
-  &:hover, &:active, &:focus {
-    color: $hoverColour;
-    text-decoration: none;
-  }
-}
 
 // Styles for typeset text.
 .typeset {

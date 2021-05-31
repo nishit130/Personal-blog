@@ -54,10 +54,12 @@ social_links: # Appears in sidebar. Set the urls then uncomment and comment out 
   RSS: /feed.xml
 
 navigation_header:
-- title: Home
-  url: /
-- title: Blog
-  url: /blog
+  - title: Home
+    url: /
+  - title: Blog
+    url: /blog
+  - title: Categories
+    url: /categories
 
 collections:
   posts:
@@ -65,19 +67,22 @@ collections:
     output: true
     description: "Bloging page | Nishit patel blogs | programming blogs" # The post list page content
     feature_text: Blog Post's
-    feature_image: "https://picsum.photos/1300/400?image=989"
+    feature_image: "https://i.pinimg.com/originals/bf/34/a8/bf34a82720a4599d341a4f10f8b50039.jpg"
   kjsce-hack:
     title: KJSCE Hack Experience
     output: true
     description: "Written by Nishit Patel, KJSCE HACK 5.0 Experience, First hackathon blog"
     feature_image: "../../../../assets/img/eureka3.jpg"
-  
+  gsoc-1:
+    title:  "Beginning my GSoC Journey"
+    output: true
+    description: "Written by Nishit Patel,Beginning GSoC journey, google summer of code experience, gsoc at GNOME organization, gnome foundation"
+    feature_image: "https://yatinmaan.github.io/assets/images/gsoc_gnome.png"
   
 
 navigation_footer:
-- title: Blog
-  url: /blog
-
+  - title: Blog
+    url: /blog
 
 sharing_links: # Appear at the bottom of single blog posts, add as desired. The value can be 'true' or the desired button colour
   Twitter: "#0d94e7"
