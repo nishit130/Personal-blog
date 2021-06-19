@@ -76,7 +76,7 @@ collections:
   gsoc-1:
     title:  "Beginning my GSoC Journey"
     output: true
-    description: "Written by Nishit Patel,Beginning GSoC journey, google summer of code experience, gsoc at GNOME organization, gnome foundation"
+    description: "Written by Nishit Patel,Beginning GSoC journey, google summer of code experience, gsoc at GNOME organization, gnome foundation, mygsoc, My GSoC"
     feature_image: "https://yatinmaan.github.io/assets/images/gsoc_gnome.png"
   
 
