@@ -9,7 +9,33 @@
       <meta name="robots" content="noindex">
     {% endif %}
 
-    {% if page.collectionpage != "posts" %}
+    {% if page.collectionpage == "posts" %}
+
+      {% assign collectiondata = site.collections | where: "label", page.collectionpage | first %}
+      <title>{{ collectiondata.title }} - {{ site.title }}</title>
+      <meta property="og:title" content="{{ collectiondata.title }}">
+      <meta name="description" content="{{ collectiondata.description }}">
+      <meta property="og:description" content="{{ collectiondata.description }}">
+
+
+    {% elsif page.collectionpage == "home" %}
+      
+      <title>{{ site.title }} - Home</title>
+      <meta property="og:title" content="{{ site.title }}">
+      <meta name="description" content="{{ site.description }}">
+      <meta property="og:description" content="{{ collectiondata.description }}">
+
+
+    {% elsif page.collectionpage == "categories" %}
+    
+    <title>Categories</title>
+    <meta property="og:title" content="{{ site.title }} - Categories">
+    <meta name="description" content="Categories page, Indexing page for the blogs">
+    <meta property="og:description" content="Categories page, Indexing page for the blogs">
+
+
+   
+    {% else %}
       {% assign collectiondata = site.collections | where: "label", page.collectionpage | first %}
       <title>{{ collectiondata.title }} - {{ site.title }}</title>
       <meta property="og:title" content="{{ collectiondata.title }}">
@@ -27,20 +53,9 @@
         "dateModified": "{{page.date}}"
       }
       </script>
-
-
-    {% elsif page.collectionpage %}
-
-      {% assign collectiondata = site.collections | where: "label", page.collectionpage | first %}
-      <title>{{ collectiondata.title }} - {{ site.title }}</title>
-      <meta property="og:title" content="{{ collectiondata.title }}">
-      <meta name="description" content="{{ collectiondata.description }}">
-      <meta property="og:description" content="{{ collectiondata.description }}">
-
-    {% else %}
-      <title>Nishit Patel</title>
     {% endif %}
 
+    <script src="https://kit.fontawesome.com/daf0283f09.js" crossorigin="anonymous"></script>
     <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
     <meta name="theme-color" content="{{ site.manifest.theme_color | default: '#242e2b' }}"/>
 
@@ -59,6 +74,7 @@
 
   <body class="layout-{{ page.layout }}{% if page.title %}  {{ page.title | slugify }}{% endif %}">
     {% include site-icons.svg %}
+
     {{ content }}
 
     {% if site.service_worker != false %}{% include site-sw.html %}{% endif %}
