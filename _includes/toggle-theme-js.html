@@ -5,7 +5,6 @@
     document.documentElement.setAttribute('data-theme', currentTheme);
 
   function themeChange() {
-    console.log("theme change!")
     let button = document.querySelector('.theme-toggle');
 
     button.addEventListener('click', function (e) {
@@ -19,7 +18,9 @@
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
       }
-      console.log("on click!")
+      const themeEvent = new Event('themeChanged');
+      document.dispatchEvent(themeEvent);
+
     });
 
     let transition = () => {
