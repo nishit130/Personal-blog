@@ -10,7 +10,7 @@ excerpt: "Weekly update of GSoC'21 project. Include's work done on week 1, 2 and
 ---
 
 
-This is a weekly update on my GSoC project.
+This is a weekly update of my GSoC project.
 
 ### Week 1
 
