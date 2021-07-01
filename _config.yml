@@ -60,7 +60,7 @@ navigation_header:
   - title: Blog
     url: /blog
   - title: Categories
-    url: /categories
+    url: /categories/
 
 collections:
   posts:
