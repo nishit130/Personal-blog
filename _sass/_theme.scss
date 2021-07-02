@@ -1,5 +1,20 @@
 // Structural elements
 html {
+    --headings: #05bf85;
+    --links: #05bf85;
+    --highlight: #41C7C7;
+    --bg: #1f242A;
+    --bg-secondary: #323945;
+    --text: #d9dde0;
+    --code-text: #91A7FF;
+    --share-text: #C4C4C4;
+    --caption: #f8fcfb;
+    --hoverColour: #94ecb9;
+
+}
+
+@mixin light-appearance {
+  html, body  {
     --bg: #FFF;
     --bg-secondary: #f8f8f8;
     --headings: #05bf85;
@@ -11,27 +26,12 @@ html {
     --caption: #1a1b1b;
     --hoverColour: #175042;
 
-}
-
-@mixin dark-appearance {
-  html, body  {
-      --headings: #05bf85;
-      --links: #05bf85;
-      --highlight: #41C7C7;
-      --bg: #1f242A;
-      --bg-secondary: #323945;
-      --text: #d9dde0;
-      --code-text: #91A7FF;
-      --share-text: #C4C4C4;
-      --caption: #f8fcfb;
-      --hoverColour: #94ecb9;
-
   };
 }
-html[data-theme="dark"] { @include dark-appearance; }
+html[data-theme="light"] { @include light-appearance; }
 
-@media (prefers-color-scheme: dark) {
-  body[data-theme="auto"] { @include dark-appearance; }
+@media (prefers-color-scheme: light) {
+  body[data-theme="auto"] { @include light-appearance; }
 }
 
 body {
