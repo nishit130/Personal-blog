@@ -78,12 +78,17 @@ collections:
     title:  "Beginning my GSoC Journey"
     output: true
     description: "Written by Nishit Patel,Beginning GSoC journey, google summer of code experience, gsoc at GNOME organization, gnome foundation, mygsoc, My GSoC"
-    feature_image: "https://yatinmaan.github.io/assets/images/gsoc_gnome.png"
+    feature_image: "/assets/img/gsoc_gnome.png"
   gsoc-2:
-    title:  "GSoC project update's"
+    title:  "GSoC project update part I"
     output: true
     description: "Written by Nishit Patel,Weekly GSoC journey, google summer of code, gsoc at GNOME organization, gnome foundation, Week wise documentation of GSoC journey"
-    feature_image: "https://yatinmaan.github.io/assets/images/gsoc_gnome.png"
+    feature_image: "/assets/img/gsoc_gnome.png"
+  gsoc-3:
+    title:  "GSoC project update part II"
+    output: true
+    description: "Written by Nishit Patel,Weekly GSoC journey, google summer of code, gsoc at GNOME organization, gnome foundation, Experience at GUADEC"
+    feature_image: "/assets/img/gsoc_gnome.png"
   
 
 navigation_footer:

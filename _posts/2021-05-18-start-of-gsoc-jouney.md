@@ -5,7 +5,7 @@ date:   2021-05-31 10:08:01 +0530
 comments: True
 categories: GSoC'21
 collectionpage: gsoc-1
-feature: False
+feature: True
 excerpt: "This is going to be an introductory blog where I will talk about the project on which I’ll be working this summer in GNOME Foundation."
 ---
 

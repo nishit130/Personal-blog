@@ -15,16 +15,16 @@ html {
 
 @mixin light-appearance {
   html, body  {
-    --bg: #FFF;
+    --bg: rgb(226 210 210 / 70%);
     --bg-secondary: #f8f8f8;
-    --headings: #05bf85;
-    --text: #384743;
-    --links: #05bf85;
-    --highlight: #FFECB2; // light yellow
+    --headings: #1d916d;
+    --text: #000000;
+    --links: #1d916d;
+    --highlight: #FFECB2;
     --code-text: #9D174D;
     --share-text: #999;
     --caption: #1a1b1b;
-    --hoverColour: #175042;
+    --hoverColour: #1d916d;
 
   };
 }
@@ -129,7 +129,7 @@ a {
   margin-bottom: 1.6rem;
   text-align: center;
   background: var(--bg);
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   .container {
