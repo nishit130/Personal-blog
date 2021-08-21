@@ -26,10 +26,7 @@ body {
 
   // Nice underlines for text links.
   p a, li a {
-    text-decoration: underline;
-    text-decoration-skip-ink: auto;
-    -webkit-text-decoration-skip: ink;
-    text-decoration-skip: ink;
+    text-decoration: none;
   }
 
   // Paragraphs. OpenType ligatures and oldstyle figures enabled if available.

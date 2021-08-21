@@ -130,6 +130,7 @@ DEPENDENCIES
   jekyll (~> 3.5)
   jekyll-feed (~> 0.12)
   jekyll-remote-theme
+  jemoji
   kramdown-parser-gfm
   tzinfo (~> 1.2)
   tzinfo-data
