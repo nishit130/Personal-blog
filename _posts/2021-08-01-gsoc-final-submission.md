@@ -38,10 +38,10 @@ This was the major primary goal of the project. After adding this feature, Track
 This feature depends on previous work done in Tracker-miners. After adding this feature, Nautilus now supports searching files by file-creation time.
 
 *Pull Requests* 
-[!693 (Open under review)](https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/693)
+[!693 (Merged)](https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/693)
 
 *Issues* 
-[#1761 (Open)](https://gitlab.gnome.org/GNOME/nautilus/-/issues/1761)
+[#1761 (Closed)](https://gitlab.gnome.org/GNOME/nautilus/-/issues/1761)
 
 #### Improve nautilus-search engine tests suite.
 
