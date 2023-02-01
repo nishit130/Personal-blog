@@ -18,6 +18,7 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jemoji
+  - jekyll-redirect-from
   # - jekyll-remote-theme
 
 # Exclude from processing.
