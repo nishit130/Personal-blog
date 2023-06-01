@@ -9,7 +9,7 @@ feature: False
 excerpt: "It has been a great journey working on the Tracker project. In the past 10 weeks I got to learn a lot about the project and its architecture ..."
 ---
 
-It has been a great journey working on the Tracker project. In the past 10 weeks, I got to learn a lot about the project and its architecture. This is the final submission of the project. For the weekly updates, check out my previous posts [here](https://www.nishitpatel.tech/categories#gsoc-21).
+It has been a great journey working on the Tracker project. In the past 10 weeks, I got to learn a lot about the project and its architecture. This is the final submission of the project. For the weekly updates, check out my previous posts [here](https://nishitpatel.dev/categories#gsoc-21).
 
 ### Proposed project goals 
 
@@ -79,7 +79,7 @@ It was an amazing experience working in GNOME Community. I would like to thank m
 <ul>
 <li><a href="https://gitlab.gnome.org/groups/GNOME/-/merge_requests?scope=all&state=all&author_username=nis130">All Merge Requests</a></li>
 <li><a href="https://gitlab.gnome.org/groups/GNOME/-/issues?scope=all&state=all&author_username=nis130">All Issues</a></li>
-<li><a href="https://www.nishitpatel.tech/categories#gsoc-21">Weekly update's</a></li>
+<li><a href="https://nishitpatel.dev/categories#gsoc-21">Weekly update's</a></li>
 <li><a href="https://gitlab.gnome.org/nis130">My Gitlab Account</a></li>
 <li><a href="https://youtu.be/DjmL5YbcPEQ?t=6701">GUADEC Talk</a></li>
 </ul>

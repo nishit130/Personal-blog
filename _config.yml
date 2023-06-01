@@ -4,7 +4,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Portfolio and blog website of Nishit Patel.
   programmer and open source contributor.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://www.nishitpatel.tech" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://nishitpatel.dev" # the base hostname & protocol for your site, e.g. http://example.com
 disqus: "blog-iiu4zzvb3v"
 twitter_username: nishit130
 github_username:  nis130
@@ -44,8 +44,6 @@ plugins:
 
 encoding: utf-8 # Make sure the encoding is right
 lang: en-IN # Set the site language
-title: "Nishit Patel" # Site name or title, also used in jekyll-seo-tag
-description: "Portfolio webstie of Nishit Patel | Programmer | Open source contributor" # Site description and default description, also used in jekyll-seo-tag
 twitter_url: "https://twitter.com/nishit130"
 linkedin_url: "https://www.linkedin.com/in/nishit130/"
 
@@ -98,7 +96,11 @@ collections:
     output: true
     description: "Written by Nishit Patel,Weekly GSoC journey, google summer of code, gsoc at GNOME organization, gnome foundation, Experience at GUADEC, GSoC final submission"
     feature_image: "/assets/img/gsoc_gnome.png"
-  
+  signed-url:
+    title: How to create custom signed url's
+    output: true
+    description: "Written by Nishit Patel, KJSCE HACK 5.0 Experience, First hackathon blog"
+    feature_image: "../../../../assets/img/eureka3.jpg"
 
 navigation_footer:
   - title: Blog

@@ -20,7 +20,7 @@ html {
     --bg-secondary: #f8f8f8;
     --headings: #1d916d;
     --text: #000000;
-    --links: #1d916d;
+    --links: #1d7a5f;
     --blog-links: #7ef0b7;
     --highlight: #FFECB2;
     --code-text: #9D174D;
@@ -53,7 +53,7 @@ body {
 
 // Links.
 a {
-  color: $linkColour;
+  color: var(--links);
   text-decoration: none;
   transition: color .1s, background-color .1s;
 
@@ -534,10 +534,17 @@ label {
 
 code {
   padding: .12rem .2rem;
-  color: var(--headings);
+  border-radius: 5px;
+  color: #FFFFFF;
 }
 
 pre code {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
   padding: 0;
 }
 
