@@ -123,7 +123,7 @@ def get_course_ppt(user_id: UUID, object_name: str, expiry: int, token: str) -> 
         return Response(status=500, entity="Some error occurred")
 ```
 
-We check if calculated value of HMAC matches the `token` to make sure than the url parameters are not tampered by the third party.
+We check if calculated value of HMAC matches the `token` to make sure that the url parameters are not tampered by the third party.
 
 ### Conclusion
 
