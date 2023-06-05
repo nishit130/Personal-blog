@@ -6,7 +6,9 @@ comments: True
 categories: KJSCE-Hack
 collectionpage: kjsce-hack
 feature: True
+excerpt: "In this blog, I will share my experience at **KJSCE Hackathon 2019**. first, let me explain what is a hackathon and if you already know than skip the next 5-6 lines."
 ---
+
 In this blog, I will share my experience at **KJSCE Hackathon 2019**. first, let me explain what is a hackathon and if you already know than skip the next 5-6 lines.
 
 Hackathon’s are of a various type depending on time for example 12hr, 24hr, 48hr or they can be different by themes like hardware and software hackathons. They are generally development based event where you have to create a working product which aim's to solve our day to day problem. Also it should be created within a time-bound given to you. It is a team-based event, generally a team of four. This much intro is enough for you to understand what is a hackathon, so lets start with my experience.

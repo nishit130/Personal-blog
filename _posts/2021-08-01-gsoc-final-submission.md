@@ -79,7 +79,7 @@ It was an amazing experience working in GNOME Community. I would like to thank m
 <ul>
 <li><a href="https://gitlab.gnome.org/groups/GNOME/-/merge_requests?scope=all&state=all&author_username=nis130">All Merge Requests</a></li>
 <li><a href="https://gitlab.gnome.org/groups/GNOME/-/issues?scope=all&state=all&author_username=nis130">All Issues</a></li>
-<li><a href="https://www.nishitpatel.dev/categories#gsoc-21">Weekly update's</a></li>
+<li><a href="https://nishitpatel.dev/categories#gsoc-21">Weekly update's</a></li>
 <li><a href="https://gitlab.gnome.org/nis130">My Gitlab Account</a></li>
 <li><a href="https://youtu.be/DjmL5YbcPEQ?t=6701">GUADEC Talk</a></li>
 </ul>
