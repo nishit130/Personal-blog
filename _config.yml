@@ -104,7 +104,7 @@ collections:
   signed-url:
     title: How to create custom signed url's
     output: true
-    description: "Written by Nishit Patel, KJSCE HACK 5.0 Experience, First hackathon blog"
+    description: "Learn how to create custom signed URLs for enhanced security and control. This blog provides a comprehensive guide on generating signed URLs, allowing you to securely share resources with authorized users and limit access to your content. Gain valuable insights into the key steps, best practices, and common use cases for implementing custom signed URLs. Enhance the security of your web applications and protect your valuable assets with this informative tutorial."
     feature_image: "../../../../assets/img/eureka3.jpg"
 
 navigation_footer:
