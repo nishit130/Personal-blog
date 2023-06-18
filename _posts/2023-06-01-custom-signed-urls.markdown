@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "How to create custom signed URLs"
+author: "Nishit Patel"
 date:   2023-06-01 14:46:01 +0530
 comments: True
 categories: Tutorials

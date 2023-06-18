@@ -1,4 +1,5 @@
-title: Nishit Patel
+title: Nishit Patel's Site
+tagline: Tech Blogs and portfolio website
 email: nishitlimbani130@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Portfolio and blog website of Nishit Patel.
@@ -8,6 +9,18 @@ url: "https://nishitpatel.dev" # the base hostname & protocol for your site, e.g
 disqus: "blog-iiu4zzvb3v"
 twitter_username: nishit130
 github_username:  nis130
+twitter:
+  username: nishit130
+  card: summary
+author:
+  twitter: nishit130
+social:
+  name: Nishit Patel
+  links:
+    - https://twitter.com/nishit130
+    - https://www.linkedin.com/in/nishit130
+    - https://github.com/nis130
+
 
 google_analytics: "G-S352GEKRVY"
 
@@ -19,6 +32,7 @@ plugins:
   - jekyll-sitemap
   - jemoji
   - jekyll-redirect-from
+  - jekyll-seo-tag
   # - jekyll-remote-theme
 
 # Exclude from processing.

@@ -9,6 +9,8 @@
       <meta name="robots" content="noindex">
     {% endif %}
 
+    {% seo %}
+
     {% if page.collectionpage == "posts" %}
 
       {% assign collectiondata = site.collections | where: "label", page.collectionpage | first %}
@@ -36,23 +38,7 @@
 
    
     {% else %}
-      {% assign collectiondata = site.collections | where: "label", page.collectionpage | first %}
-      <title>{{ collectiondata.title }} - {{ site.title }}</title>
-      <meta property="og:title" content="{{ collectiondata.title }}">
-      <meta name="description" content="{{ collectiondata.description }}">
-      <meta property="og:description" content="{{ collectiondata.description }}">
-      <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": "{{collectiondata.title}}",
-        "image": [
-          "https://nishitpatel.dev/assets/img/feature.jpg"
-        ],
-        "datePublished": "{{page.date}}",
-        "dateModified": "{{page.date}}"
-      }
-      </script>
+      
     {% endif %}
 
     <script src="https://kit.fontawesome.com/daf0283f09.js" crossorigin="anonymous"></script>
