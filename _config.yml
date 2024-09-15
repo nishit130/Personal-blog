@@ -9,7 +9,7 @@ url: "https://nishitpatel.dev" # the base hostname & protocol for your site, e.g
 disqus: "blog-iiu4zzvb3v"
 avatarurl: '/assets/logos/favicon.ico'
 twitter_username: nishit130
-github_username:  nis130
+github_username:  nishit130
 twitter:
   username: nishit130
   card: summary
@@ -20,7 +20,7 @@ social:
   links:
     - https://twitter.com/nishit130
     - https://www.linkedin.com/in/nishit130
-    - https://github.com/nis130
+    - https://github.com/nishit130
 
 
 google_analytics: "G-S352GEKRVY"
@@ -65,8 +65,8 @@ linkedin_url: "https://www.linkedin.com/in/nishit130/"
 social_links: # Appears in sidebar. Set the urls then uncomment and comment out as desired
   Twitter: https://twitter.com/nishit130
   LinkedIn: https://www.linkedin.com/in/nishit130/
-  GitHub: https://github.com/nis130
-  Gitlab: https://gitlab.gnome.org/nis130
+  GitHub: https://github.com/nishit130
+  Gitlab: https://gitlab.gnome.org/nishit130
   RSS: /feed.xml
 
 navigation_header:

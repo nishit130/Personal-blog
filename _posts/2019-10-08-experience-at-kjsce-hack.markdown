@@ -34,7 +34,7 @@ Our product Hospipro included features like:
 
 I noticed that most of the teams were using new and easy to build tech stack like Flask, nodejs etc for the backend, and during the judging round. I would like to suggest that, if you are planning to participate in your first hackathon then do make some pre-preparation regarding the idea and how you are going to implement it.
 
-{% include button.html  text="Source Code of Hospipro" icon="github" link="https://github.com/nis130" color="#0366d6" %}
+{% include button.html  text="Source Code of Hospipro" icon="github" link="https://github.com/nishit130" color="#0366d6" %}
 
 
 
