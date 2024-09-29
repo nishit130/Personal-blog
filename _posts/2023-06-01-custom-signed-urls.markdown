@@ -12,6 +12,10 @@ excerpt: "In today's cloud-based world, secure and efficient access to private r
 
 ![signed-url-blog.png](../../../../assets/img/signed-url-blog.png)
 
+Listen to blog in podcast format 👇
+
+../../../../assets/custom_url_podcast.mp3
+
 In today's cloud-based world, secure and efficient access to private resources stored on cloud platforms is crucial. One of the ways to provide secure access to these resources is by using Signed URLs. Signed URLs allow users to access private objects on cloud platforms like Amazon Web Services (AWS) S3 and Google Cloud Storage (GCS).
 
 A signed URL is a special type of URL that includes a signature, or token, that verifies the identity of the user or application making the request to access a specific resource, such as an object stored in GCS/S3 bucket. This token allows the server to confirm that the user or application has the necessary permissions to access the resource and prevent unauthorized access.
@@ -131,3 +135,4 @@ We check if calculated value of HMAC matches the `token` to make sure that the u
 Concluding, signed URLs are your trusted allies in securing access to your cloud-hosted private resources. However, the 7-day expiry limit can sometimes be a hindrance. Creating custom signed URLs, honoring the principles of time-limited access, controlled access permissions, and secure authentication and authorization, is a savvy way to circumvent this challenge. This strategy empowers you to provide temporary access to your resources while ensuring optimal security and control.
 
 
+{% include open-embed.html %}
