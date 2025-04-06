@@ -1,52 +1,60 @@
 {% if site.navigation_header %}
-<nav class="nav  nav--header">
-  <ul class="list  list--nav">
+<nav class="nav nav--header">
+  <div class="nav-container">
     {% for item in site.navigation_header %}
-
       {% if item.url contains '://' %}
         {% assign url = item.url %}
       {% else %}
         {% assign url = item.url | relative_url %}
       {% endif %}
 
-      <li class="item  item--nav{% if item.url == page.url %}  item--current{% endif %}">
-        <a href="{{ url }}">{{ item.title }}</a>
-      </li>
-
+      <a href="{{ url }}" class="nav-item{% if item.url == page.url %} nav-item--current{% endif %}">{{ item.title }}</a>
     {% endfor %}
-  </ul>
+  </div>
 
-
-  <button class="button  button--nav" aria-label="Menu toggle">
-    {% include icon.html id="nav" title="Menu" %}
-  </button>
+  <div class="nav-controls">
+    <button class="button button--nav" aria-label="Menu toggle">
+      {% include icon.html id="nav" title="Menu" color="#4285F4" %}
+    </button>
+    
+    <div class="theme-toggle">
+      {% include theme-toggle-button.html %}
+    </div>
+  </div>
 </nav>
-   <span class="togle" style="float: right;display: inline;">
-    {% include theme-toggle-button.html %}
-    </span>
 {% else %}
   {% include nav-default.html %}
 {% endif %}
 
 <script type="text/javascript">
-  // Get list and button
-  const navList = document.querySelector('.header .list--nav')
-  const button  = document.querySelector('.header .button--nav')
+  // Get nav container and button
+  const navContainer = document.querySelector('.header .nav-container')
+  const button = document.querySelector('.header .button--nav')
 
   // Hide nav and apply toggle
   const collapseNav = () => {
     if (document.body.clientWidth < 640) {
-      navList.style.setProperty('--listHeight', `-${navList.offsetHeight}px`)
+      navContainer.style.display = 'none'
+      button.style.display = 'block'
     } else {
-      navList.removeAttribute('style')
+      navContainer.style.display = 'flex'
+      button.style.display = 'none'
     }
 
     button.onclick = () => {
-      navList.style.setProperty('transition', `margin .1s`)
-      if (navList.style.getPropertyValue('--listHeight')) {
-        navList.style.removeProperty('--listHeight')
+      if (navContainer.style.display === 'none') {
+        navContainer.style.display = 'flex'
+        navContainer.style.flexDirection = 'column'
+        navContainer.style.width = '100%'
+        navContainer.style.position = 'absolute'
+        navContainer.style.top = '100%'
+        navContainer.style.left = '0'
+        navContainer.style.backgroundColor = 'var(--bg-secondary)'
+        navContainer.style.padding = '1rem'
+        navContainer.style.zIndex = '99'
+        navContainer.style.boxShadow = 'var(--box-shadow)'
       } else {
-        navList.style.setProperty('--listHeight', `-${navList.offsetHeight}px`)
+        navContainer.style.display = 'none'
       }
     }
   }

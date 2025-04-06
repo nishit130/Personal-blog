@@ -1,19 +1,16 @@
 {% if site.navigation_footer %}
-<nav class="nav  nav--footer">
-  <ul class="list list--nav">
+<nav class="nav nav--footer">
+  <div class="nav-container">
     {% for item in site.navigation_footer %}
-
       {% if item.url contains '://' %}
         {% assign url = item.url %}
       {% else %}
         {% assign url = item.url | relative_url %}
       {% endif %}
 
-      <li class="item  item--nav{% if item.url == page.url %}  item--current{% endif %}">
-        <a href="{{ url }}">{{ item.title }}</a>
-      </li>
+      <a href="{{ url }}" class="nav-item{% if item.url == page.url %} nav-item--current{% endif %}">{{ item.title }}</a>
     {% endfor %}
-  </ul>
+  </div>
 </nav>
 {% else %}
   {% include nav-default.html %}

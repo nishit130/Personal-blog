@@ -40,5 +40,5 @@ I noticed that most of the teams were using new and easy to build tech stack lik
 
 **Images taken during Hackathon**
 
-![](../../../../assets/img/feature.jpg)
-![](../../../../assets/img/image2.jpeg)
+[![Hackathon Image 1](../../../../assets/img/feature.jpg)](../../../../assets/img/feature.jpg)
+[![Hackathon Image 2](../../../../assets/img/image2.jpeg)](../../../../assets/img/image2.jpeg)

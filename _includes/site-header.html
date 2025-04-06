@@ -1,4 +1,17 @@
 <header class="header">
+  {% if site.lightbox %}
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/lightbox.css">
+    <script src="{{ site.baseurl }}/assets/scripts/lightbox.js"></script>
+  {% endif %}
+
+  <script>
+    document
+      .getElementById("_pushState")
+      .addEventListener("hy-push-state-load", function () {
+        apply_lightbox();
+      });
+  </script>
+  
   <div class="container">
     {% if site.logo %}{% include site-logo.html %}{% endif %}
 
