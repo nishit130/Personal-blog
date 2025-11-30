@@ -7,9 +7,9 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://nishitpatel.dev" # the base hostname & protocol for your site, e.g. http://example.com
 disqus: "blog-iiu4zzvb3v"
-avatarurl: '/assets/logos/favicon.ico'
+avatarurl: "/assets/logos/favicon.ico"
 twitter_username: nishit130
-github_username:  nishit130
+github_username: nishit130
 twitter:
   username: nishit130
   card: summary
@@ -21,7 +21,6 @@ social:
     - https://twitter.com/nishit130
     - https://www.linkedin.com/in/nishit130
     - https://github.com/nishit130
-
 
 google_analytics: "G-S352GEKRVY"
 
@@ -36,9 +35,7 @@ plugins:
   - jekyll-seo-tag
   # - jekyll-remote-theme
 
-
 lightbox: true
-
 
 encoding: utf-8 # Make sure the encoding is right
 lang: en-IN # Set the site language
@@ -46,7 +43,7 @@ twitter_url: "https://twitter.com/nishit130"
 linkedin_url: "https://www.linkedin.com/in/nishit130/"
 
 social_links: # Appears in sidebar. Set the urls then uncomment and comment out as desired
-  Twitter: https://twitter.com/nishit130
+  Twitter: https://x.com/intent/follow?screen_name=nishit130
   LinkedIn: https://www.linkedin.com/in/nishit130/
   GitHub: https://github.com/nishit130
   Gitlab: https://gitlab.gnome.org/nishit130
@@ -80,22 +77,22 @@ collections:
     description: "Written by Nishit Patel, KJSCE HACK 5.0 Experience, First hackathon blog"
     feature_image: "../../../../assets/img/eureka3.jpg"
   gsoc-1:
-    title:  "Beginning my GSoC Journey"
+    title: "Beginning my GSoC Journey"
     output: true
     description: "Written by Nishit Patel,Beginning GSoC journey, google summer of code experience, gsoc at GNOME organization, gnome foundation, mygsoc, My GSoC"
     feature_image: "/assets/img/gsoc_gnome.png"
   gsoc-2:
-    title:  "GSoC project update part I"
+    title: "GSoC project update part I"
     output: true
     description: "Written by Nishit Patel,Weekly GSoC journey, google summer of code, gsoc at GNOME organization, gnome foundation, Week wise documentation of GSoC journey"
     feature_image: "/assets/img/gsoc_gnome.png"
   gsoc-3:
-    title:  "GSoC project update part II"
+    title: "GSoC project update part II"
     output: true
     description: "Written by Nishit Patel,Weekly GSoC journey, google summer of code, gsoc at GNOME organization, gnome foundation, Experience at GUADEC"
     feature_image: "/assets/img/gsoc_gnome.png"
   gsoc-4:
-    title:  "GSoC final submission"
+    title: "GSoC final submission"
     output: true
     description: "Written by Nishit Patel,Weekly GSoC journey, google summer of code, gsoc at GNOME organization, gnome foundation, Experience at GUADEC, GSoC final submission"
     feature_image: "/assets/img/gsoc_gnome.png"
@@ -103,7 +100,6 @@ collections:
     title: How to create custom signed url's
     output: true
     description: "Learn how to create custom signed URLs for enhanced security and control. This blog provides a comprehensive guide on generating signed URLs, allowing you to securely share resources with authorized users and limit access to your content. Gain valuable insights into the key steps, best practices, and common use cases for implementing custom signed URLs. Enhance the security of your web applications and protect your valuable assets with this informative tutorial."
-    feature_image: "../../../../assets/img/eureka3.jpg"
 
 navigation_footer:
   - title: Blog
@@ -118,9 +114,9 @@ sharing_links: # Appear at the bottom of single blog posts, add as desired. The 
 
 # Site Icons
 favicons:
-  36: '/assets/logos/android-icon-36x36.png'
-  48: '/assets/logos/android-icon-48x48.png'
-  72: '/assets/logos/android-icon-72x72.png'
-  96: '/assets/logos/android-icon-96x96.png'
-  144: '/assets/logos/android-icon-144x144.png'
-  192: '/assets/logos/android-icon-192x192.png'
+  36: "/assets/logos/android-icon-36x36.png"
+  48: "/assets/logos/android-icon-48x48.png"
+  72: "/assets/logos/android-icon-72x72.png"
+  96: "/assets/logos/android-icon-96x96.png"
+  144: "/assets/logos/android-icon-144x144.png"
+  192: "/assets/logos/android-icon-192x192.png"

@@ -10,20 +10,39 @@ layout: default
 
     <h1>{{ page.title }}</h1>
 
-     <div class="div-1">
-       <div class="div-2">
-         <img src="/assets/img/myself2.jpg" alt="Nishit Patel">
+     <div class="hero-section">
+       <div class="hero-image-container">
+         <img src="/assets/img/myself2.jpg" alt="Nishit Patel" class="hero-image">
        </div>
-       <div class="div-3">
-         <h1>Hello I'm Nishit Patel</h1>
+       <div class="hero-content">
+         <h1 class="hero-title">Hello, I'm <span class="text-gradient">Nishit Patel</span></h1>
+         <p class="hero-subtitle">
+           I'm a programmer and open source contributor. Welcome to my digital garden where I share my learnings and experiences.
+         </p>
        </div>
-       <div class="div-4">
-         <ul>
-          <li><a href="{{ site.social_links.GitHub }}" class="fab fa-github"></a></li>
-          <li><a href="{{ site.social_links.Gitlab }}" class="fab fa-gitlab"></a></li>
-          <li><a href="{{ site.social_links.Twitter }}" class="fab fa-twitter"></a></li>
-          <li><a href="{{ site.social_links.LinkedIn }}" class="fab fa-linkedin"></a></li>
-        </ul>
+       <div class="social-links">
+         <a href="{{ site.social_links.GitHub }}" class="btn btn-secondary shadow-sm"><span class="fab fa-github mr-2"></span>GitHub</a>
+         <a href="{{ site.social_links.Twitter }}" class="btn btn-secondary shadow-sm"><span class="fab fa-x-twitter mr-2"></span>Twitter</a>
+         <a href="{{ site.social_links.LinkedIn }}" class="btn btn-secondary shadow-sm"><span class="fab fa-linkedin mr-2"></span>LinkedIn</a>
+       </div>
+     </div>
+
+     <div class="recent-posts-section">
+       <h2 class="section-title">Recent Posts</h2>
+       <div class="posts-grid">
+         {% for post in site.posts limit:3 %}
+         <div class="card post-card">
+           <span class="post-date">{{ post.date | date: "%b %d, %Y" }}</span>
+           <h3 class="post-title">
+             <a href="{{ post.url }}" class="text-gradient">{{ post.title }}</a>
+           </h3>
+           <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+           <a href="{{ post.url }}" class="btn btn-primary text-sm">Read More</a>
+         </div>
+         {% endfor %}
+       </div>
+       <div class="view-all-container">
+         <a href="/blog" class="btn btn-secondary">View All Posts</a>
        </div>
      </div>
 
