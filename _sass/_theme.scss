@@ -190,11 +190,27 @@ a {
     @include flex-direction(row);
     @include justify-content(space-between);
     @include align-items(center);
-    padding: 1.5rem 0;
   }
   
   .logo {
     @include flex(0 0 auto);
+  }
+}
+
+.footer {
+  .container {
+    padding: 1.5rem 0;
+  }
+}
+
+.header {
+  .container {
+    padding: 1.5rem 0;
+  }
+  @media (max-width: 640px) {
+    .container {
+      padding: 0;
+    }
   }
 }
 
