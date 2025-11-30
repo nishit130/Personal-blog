@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-IN"><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://nishitpatel.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://nishitpatel.dev/" rel="alternate" type="text/html" hreflang="en-IN" /><updated>2025-11-30T15:00:44+00:00</updated><id>https://nishitpatel.dev/feed.xml</id><title type="html">Nishit Patel’s Site</title><subtitle>Portfolio and blog website of Nishit Patel. programmer and open source contributor.</subtitle><author><name>{&quot;twitter&quot;=&gt;&quot;nishit130&quot;}</name></author><entry><title type="html">How to create custom signed URLs</title><link href="https://nishitpatel.dev/tutorials/2023/06/01/custom-signed-urls.html" rel="alternate" type="text/html" title="How to create custom signed URLs" /><published>2023-06-01T09:16:01+00:00</published><updated>2023-06-01T09:16:01+00:00</updated><id>https://nishitpatel.dev/tutorials/2023/06/01/custom-signed-urls</id><content type="html" xml:base="https://nishitpatel.dev/tutorials/2023/06/01/custom-signed-urls.html"><![CDATA[<p><img src="../../../../assets/img/signed-url-blog.png" alt="signed-url-blog.png" /></p>
+
+<p>Listen to blog in podcast format 👇</p>
+
+<p>../../../../assets/custom_url_podcast.mp3</p>
+
+<p>In today’s cloud-based world, secure and efficient access to private resources stored on cloud platforms is crucial. One of the ways to provide secure access to these resources is by using Signed URLs. Signed URLs allow users to access private objects on cloud platforms like Amazon Web Services (AWS) S3 and Google Cloud Storage (GCS).</p>
+
+<p>A signed URL is a special type of URL that includes a signature, or token, that verifies the identity of the user or application making the request to access a specific resource, such as an object stored in GCS/S3 bucket. This token allows the server to confirm that the user or application has the necessary permissions to access the resource and prevent unauthorized access.</p>
+
+<p>Major cloud platforms like AWS and GCP provide functionality of signed URL but they have a limitation on the expiry of the URL. We can set maximum expiry time to only 7 days. To overcome this constraints of expiry In this blog you will learn how to create your own custom signed url’s for your usecase.</p>
+
+<p>So, why should you care about custom signed URLs? Consider these scenarios:</p>
+
+<ul>
+  <li>You need to provide limited access to private resources for a temporary period, without granting permanent rights.</li>
+  <li>You wish to let users download files without going through tedious multiple authentication.</li>
+  <li>You intend to generate time-limited URLs, specifically for sharing resources based on your product’s RBAC.</li>
+</ul>
+
+<p>Imagine owning an e-learning platform where students can access various course materials, from lecture videos and presentation slides to supplementary documents. To accommodate their learning journey, you want to offer them access for an extended period, perhaps the entire semester. Here’s where you encounter a roadblock: the 7-day expiry limit imposed by AWS and GCS. To bypass this hurdle, you need a custom implementation of the signed URL feature.</p>
+
+<p>This is how high level architecture is going to look like.</p>
+
+<p><img src="../../../../assets/img/shapes.png" alt="shapes.png" /></p>
+
+<p>Users will send a <code class="language-plaintext highlighter-rouge">Get</code> request to your backend API server through a signed URL. The response to this request will be determined by the parameters in the signed URL. To qualify as a signed URL, the custom signed URL should adhere to the following three principles:</p>
+
+<ol>
+  <li><strong>Time-Limited Access:</strong> The URL is a temporary passport, bearing an expiration time or duration that restricts access to a specific timeframe.</li>
+  <li><strong>Controlled Access Permissions</strong>: The URL must carry the necessary access permissions, much like a VIP pass for a specific event, granting entry only for the requested operation.</li>
+  <li><strong>Secure Authentication and Authorization</strong>: The URL must ensure that only those bearing proper credentials can access the resource.</li>
+</ol>
+
+<h3 id="url-structure">URL Structure</h3>
+
+<p>Here’s a blueprint of your signed URL</p>
+
+<p><img src="../../../../assets/img/shapes (2).png" alt="shapes (2).png" /></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">token</code> parameter serves as the <a href="https://en.wikipedia.org/wiki/HMAC" target="_blank">HMAC (Hashed Message Authentication Code)</a>, a cryptographic signature formed using a secret key and the other URL parameters. It guarantees the integrity and authenticity of the signed URL, making any alterations in the parameters futile by invalidating the URL. <br />
+<code class="language-plaintext highlighter-rouge">expiry</code> parameter helps in defining the expiry of the url while generating it. <br />
+<code class="language-plaintext highlighter-rouge">user_id</code> parameter or any other unique identifier can be used, will help in verifying that user has authorization to access the content requested by the singed url.
+Here is an illustrative python code snippet for generating signed URLs:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">BASE_URL</span> <span class="o">=</span> <span class="s">"http://api-server.com/"</span>
+
+<span class="k">def</span> <span class="nf">generate_signed_url</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">object_name</span><span class="p">,</span> <span class="n">expiry</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+	<span class="c1"># Create new secret-key or user existing from db
+</span>        <span class="n">encrypted_secret</span> <span class="o">=</span> <span class="n">get_signed_url_secret_from_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">encrypted_secret</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">encrypted_secret</span> <span class="o">=</span> <span class="n">generate_secret_key</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+				
+        <span class="c1"># decrypt secret key
+</span>        <span class="n">secret</span> <span class="o">=</span> <span class="n">decrypt_with_prefix_iv</span><span class="p">(</span><span class="n">encrypted_secret</span><span class="p">)</span>
+				
+	<span class="c1"># add expiry of 91 days
+</span>        <span class="n">expiry</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">91</span><span class="p">)</span>
+        <span class="n">expiry_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">expiry</span><span class="p">.</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+
+        <span class="n">signed_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">BASE_URL</span><span class="si">}</span><span class="s">/endpoint?user_id=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span><span class="si">}</span><span class="s">&amp;expiry=</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">expiry_timestamp</span><span class="p">)</span><span class="si">}</span><span class="s">&amp;object=</span><span class="si">{</span><span class="n">object_name</span><span class="si">}</span><span class="s">'</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+	        <span class="s">"user_id"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">user_id</span><span class="p">),</span>
+		<span class="s">"object_name"</span><span class="p">:</span> <span class="n">object_name</span><span class="p">,</span>
+	        <span class="s">"expiry"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expiry</span><span class="p">)</span>
+	<span class="p">}</span>
+        <span class="n">hmac_code</span> <span class="o">=</span> <span class="n">generate_code</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">secret</span><span class="p">)</span>
+        <span class="n">signed_url</span> <span class="o">+=</span> <span class="s">"&amp;token="</span> <span class="o">+</span> <span class="n">hmac_code</span>
+        <span class="k">return</span> <span class="n">signed_url</span>
+
+    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">pass</span> <span class="c1"># Error handling
+</span>        <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<h3 id="backend-api">Backend API</h3>
+
+<p>Let’s define the Backend logic for serving the requested content whenever a <code class="language-plaintext highlighter-rouge">Get</code> request is made to our <code class="language-plaintext highlighter-rouge">https://api-server.com/endpoint</code> . Here is the pseudo python code for implementation of the api.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">app</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">"/endpoint"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_course_ppt</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">UUID</span><span class="p">,</span> <span class="n">object_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expiry</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+    <span class="c1"># Check if URL is expired
+</span>    <span class="k">if</span> <span class="n">expiry</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">().</span><span class="n">timestamp</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="s">"URL is expired"</span><span class="p">)</span>
+
+    <span class="c1"># fetch secret-key for user
+</span>    <span class="n">encrypted_secret</span> <span class="o">=</span> <span class="n">userUtil</span><span class="p">.</span><span class="n">get_signed_url_secret_from_id</span><span class="p">(</span><span class="n">user_id</span><span class="p">)</span>
+		
+    <span class="c1"># decrypt encrypted secret-key stored in db
+</span>    <span class="n">secret</span> <span class="o">=</span> <span class="n">AESUtil</span><span class="p">.</span><span class="n">decrypt_with_prefix_iv</span><span class="p">(</span><span class="n">encrypted_secret</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s">"user_id"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">user_id</span><span class="p">),</span>
+	<span class="s">"object_name"</span><span class="p">:</span> <span class="n">object_name</span><span class="p">,</span>
+        <span class="s">"expiry"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">expiry</span><span class="p">)</span>
+    <span class="p">}</span>
+		
+    <span class="c1"># check if caclulated hmac is same as token
+</span>    <span class="k">if</span> <span class="n">HmacUtil</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">secret</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span> 
+        <span class="c1"># Fetch object from GCS/S3       
+</span>        <span class="n">ppt</span> <span class="o">=</span> <span class="n">GoogleStorageUtils</span><span class="p">.</span><span class="n">get_file_as_is</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">,</span> <span class="n">object_name</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="n">ppt</span><span class="p">,</span>
+                        <span class="n">media_type</span><span class="o">=</span><span class="n">MediaType</span><span class="p">.</span><span class="n">APPLICATION_OCTET_STREAM</span><span class="p">,</span>
+                        <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="n">HttpHeaders</span><span class="p">.</span><span class="n">CONTENT_DISPOSITION</span><span class="p">:</span> <span class="s">'attachment;
+                                 filename="'</span> <span class="o">+</span> <span class="n">object_name</span> <span class="o">+</span> <span class="s">'"'</span>
+                        <span class="p">})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">401</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="s">"Invalid URL"</span><span class="p">)</span>
+
+    <span class="c1"># Exception handling
+</span>    <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">entity</span><span class="o">=</span><span class="s">"Some error occurred"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We check if calculated value of HMAC matches the <code class="language-plaintext highlighter-rouge">token</code> to make sure that the url parameters are not tampered by the third party.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Concluding, signed URLs are your trusted allies in securing access to your cloud-hosted private resources. However, the 7-day expiry limit can sometimes be a hindrance. Creating custom signed URLs, honoring the principles of time-limited access, controlled access permissions, and secure authentication and authorization, is a savvy way to circumvent this challenge. This strategy empowers you to provide temporary access to your resources while ensuring optimal security and control.</p>
+
+<style>
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.333%;
+	height: 0;
+    background: black;
+}
+.videoWrapper iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+    border: 0;
+}    
+</style>
+
+<script>
+function get_youtube_id(url) {
+    var p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    return (url.match(p)) ? RegExp.$1 : false;
+}
+function vimeo_embed(url,el) {
+    var id = false;
+    $.ajax({
+      url: 'https://vimeo.com/api/oembed.json?url='+url,
+      async: true,
+      success: function(response) {
+        if(response.video_id) {
+          id = response.video_id;
+          if(url.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+          if(url.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+          var theInnerHTML = '<div class="videoWrapper"><iframe src="https://player.vimeo.com/video/'+id+'/?byline=0&title=0&portrait=0';
+          if(autoplay==1) theInnerHTML += '&autoplay=1';
+          if(loop==1) theInnerHTML += '&loop=1';
+          theInnerHTML += '" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>'; 
+          el.innerHTML = theInnerHTML;
+        }
+      }
+    });
+}
+function video_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        //check if this is an external url (that starts with https:// or http://
+        if (p[i].innerHTML.indexOf("http://") == 0 ||
+            p[i].innerHTML.indexOf("https://") == 0) {
+            var youtube_id = get_youtube_id(p[i].innerHTML);
+            if(youtube_id) {
+                if(p[i].innerHTML.indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(p[i].innerHTML.indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                var theInnerHTML = '<div class="videoWrapper"><iframe width="720" height="420" src="https://www.youtube.com/embed/' + youtube_id + '?rel=0&showinfo=0';
+                if(autoplay==1) theInnerHTML += '&autoplay=1';
+                if(loop==1) theInnerHTML += '&loop=1&playlist='+youtube_id+'&version=3';
+                if(p[i].innerHTML.indexOf('start=') !== -1) theInnerHTML += '&start='+p[i].innerHTML.substring(p[i].innerHTML.indexOf('start=')+6);
+                theInnerHTML += '" frameborder="0" allowfullscreen></iframe></div>';
+                p[i].innerHTML = theInnerHTML;
+            }
+            if(p[i].innerHTML.indexOf('vimeo.com') !== -1) {
+                //ask vimeo for the id and place the embed
+                vimeo_embed(p[i].innerHTML,p[i]);
+            }
+        }
+    }
+}
+video_embed();
+
+function mp3_embed() {
+    var p = document.getElementsByTagName('p');
+    for(var i = 0; i < p.length; i++) {
+        if(p[i].innerHTML.indexOf('.mp3') !== -1) {
+            var str = p[i].innerHTML.split('?');
+            if(str.length == 1) str[1] = '';
+            var str1 = str[1];
+            str1 = str1.replace('&','').replace('&','');
+            str1 = str1.replace('autoplay=1','').replace('autoplay=0','');
+            str1 = str1.replace('loop=1','').replace('loop=0','');
+            str1 = str1.replace('controls=0','').replace('controls=1','');
+
+            if (str[0].lastIndexOf('.mp3', str[0].length - 4) === str[0].length - 4 && str1.length == 0) {
+                if(str[1].indexOf('autoplay=1') !== -1) var autoplay=1; else var autoplay=0;
+                if(str[1].indexOf('loop=1') !== -1) var loop=1; else var loop=0;
+                if(str[1].indexOf('controls=0') !== -1) var controls=0; else var controls=1;
+                var newInnerHTML = '<audio';
+                if(autoplay==1) newInnerHTML += ' autoplay';
+                if(loop==1) newInnerHTML += ' loop';
+                if(controls==1) newInnerHTML += ' controls';
+                newInnerHTML += '><source src="'+str[0]+'" type="audio/mpeg">Your browser does not support the audio element.</audio>';
+                p[i].innerHTML = newInnerHTML;
+            }
+        }
+    }
+}
+mp3_embed();
+</script>]]></content><author><name>Nishit Patel</name></author><category term="Tutorials" /><summary type="html"><![CDATA[In today's cloud-based world, secure and efficient access to private resources stored on cloud platforms is crucial. One of the ways to provide secure access to these resources is by using Signed URLs....]]></summary></entry><entry><title type="html">GSoC final submission</title><link href="https://nishitpatel.dev/gsoc'21/2021/08/21/gsoc-final-submission.html" rel="alternate" type="text/html" title="GSoC final submission" /><published>2021-08-21T06:38:01+00:00</published><updated>2021-08-21T06:38:01+00:00</updated><id>https://nishitpatel.dev/gsoc'21/2021/08/21/gsoc-final-submission</id><content type="html" xml:base="https://nishitpatel.dev/gsoc'21/2021/08/21/gsoc-final-submission.html"><![CDATA[<p>It has been a great journey working on the Tracker project. In the past 10 weeks, I got to learn a lot about the project and its architecture. This is the final submission of the project. For the weekly updates, check out my previous posts <a href="https://nishitpatel.dev/categories#gsoc-21">here</a>.</p>
+
+<h3 id="proposed-project-goals">Proposed project goals</h3>
+
+<p>:heavy_check_mark: Add support of file-creation time in Tracker-miners.<br />
+:heavy_check_mark: Add feature of search by file-creation time in Nautilus.<br />
+:heavy_check_mark: Improve nautilus-search engine tests suite.</p>
+
+<h3 id="contributions">Contributions</h3>
+
+<p>Major contributions were done in <a href="https://gitlab.gnome.org/GNOME/tracker-miners">Tracker-miners</a> and <a href="https://gitlab.gnome.org/GNOME/nautilus">Nautilus</a> projects during the coding period.</p>
+
+<h4 id="add-support-of-file-creation-time-in-tracker-miners">Add support of file-creation time in Tracker-miners</h4>
+
+<p>This was the major primary goal of the project. After adding this feature, Tracker-miners now supports storing and querying file-creation time. While working on this feature, I also discovered and eventually fixed a double free bug in the indexer.</p>
+
+<p><em>Pull Requests</em> 
+<a href="https://gitlab.gnome.org/GNOME/tracker/-/merge_requests/440">!440 (Merged)</a>, 
+<a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/merge_requests/340">!340 (Merged)</a></p>
+
+<p><em>Issues</em> 
+<a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/issues/158">#158 (Closed)</a></p>
+
+<h4 id="add-feature-of-search-by-file-creation-time-in-nautilus">Add feature of search by file-creation time in Nautilus</h4>
+
+<p>This feature depends on previous work done in Tracker-miners. After adding this feature, Nautilus now supports searching files by file-creation time.</p>
+
+<p><em>Pull Requests</em> 
+<a href="https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/693">!693 (Merged)</a></p>
+
+<p><em>Issues</em> 
+<a href="https://gitlab.gnome.org/GNOME/nautilus/-/issues/1761">#1761 (Closed)</a></p>
+
+<h4 id="improve-nautilus-search-engine-tests-suite">Improve nautilus-search engine tests suite.</h4>
+
+<p>Initially, there were only two proposed goals. After having chat with the mentors, we decided to extend the project by adding one more goal to improve the nautilus-search engine test suite. While writing tests I found a bug in the nautilus-tracker-search-engine due to improper date-time format. After fixing this bug, I added tests for searching files by modification and access time in all search engines.</p>
+
+<p><em>Pull Requests</em> 
+<a href="https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/697">!697 (Merged)</a>, 
+<a href="https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/701">!701 (Open under review)</a></p>
+
+<p><em>Issues</em> 
+<a href="https://gitlab.gnome.org/GNOME/nautilus/-/issues/1933">#1933 (Closed)</a></p>
+
+<h4 id="other-miscellaneous-contributions">Other miscellaneous contributions</h4>
+
+<p>This work was done during the GSoC period but is not part of the project goals.</p>
+
+<p><em>Pull Requests</em>
+<a href="https://gitlab.gnome.org/GNOME/tracker/-/merge_requests/446">!446 (Merged)</a>, 
+<a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/merge_requests/336">!336 (Merged)</a></p>
+
+<p><em>Issues</em> 
+<a href="https://gitlab.gnome.org/GNOME/tracker/-/issues/317">#317 (Closed)</a></p>
+
+<h4 id="future-goals">Future Goals</h4>
+
+<p>Resolve any unresolved threads in the open Merge Requests. Write more tests for search by file creation time in Nautilus. Continue contributing to the projects.</p>
+
+<h4 id="closing-thoughts">Closing thoughts</h4>
+
+<p>It was an amazing experience working in GNOME Community. I would like to thank my mentors <a href="https://gitlab.gnome.org/carlosg">Carlos</a> and <a href="https://gitlab.gnome.org/sthursfield">Sam</a> for giving constructive suggestions and guiding me through the program, also thanks to <a href="https://gitlab.gnome.org/antoniof">António</a> for quick code reviews. I enjoyed attending and giving a talk at <a href="https://events.gnome.org/event/9/overview">GUADEC conference</a> and got to learn about different projects in the GNOME Circle. Looking forward to continue contributing to GNOME projects.</p>
+
+<h4 id="quick-links">Quick links</h4>
+
+<ul>
+<li><a href="https://gitlab.gnome.org/groups/GNOME/-/merge_requests?scope=all&amp;state=all&amp;author_username=nis130">All Merge Requests</a></li>
+<li><a href="https://gitlab.gnome.org/groups/GNOME/-/issues?scope=all&amp;state=all&amp;author_username=nis130">All Issues</a></li>
+<li><a href="https://nishitpatel.dev/categories#gsoc-21">Weekly update's</a></li>
+<li><a href="https://gitlab.gnome.org/nis130">My Gitlab Account</a></li>
+<li><a href="https://youtu.be/DjmL5YbcPEQ?t=6701">GUADEC Talk</a></li>
+</ul>
+
+<div class="embed-responsive embed-responsive-16by9">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/DjmL5YbcPEQ?start=6701" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+<p><br /></p>]]></content><author><name>{&quot;twitter&quot;=&gt;&quot;nishit130&quot;}</name></author><category term="GSoC'21" /><summary type="html"><![CDATA[It has been a great journey working on the Tracker project. In the past 10 weeks I got to learn a lot about the project and its architecture ...]]></summary></entry><entry><title type="html">GSoC Project update part II</title><link href="https://nishitpatel.dev/gsoc'21/2021/08/02/gsoc-project-update-part-ii.html" rel="alternate" type="text/html" title="GSoC Project update part II" /><published>2021-08-02T04:38:01+00:00</published><updated>2021-08-02T04:38:01+00:00</updated><id>https://nishitpatel.dev/gsoc'21/2021/08/02/gsoc-project-update-part-ii</id><content type="html" xml:base="https://nishitpatel.dev/gsoc'21/2021/08/02/gsoc-project-update-part-ii.html"><![CDATA[<p>For the previous week’s update check out my last post.</p>
+
+<h3 id="week-4">Week 4</h3>
+
+<p>While reading the documentation, I came across a bug that was leading to broken links. After some debugging and testing, I was able to fix the bug. It was due to a missing configuration in the documentation engine.</p>
+
+<p><em>Issues</em>: <a href="https://gitlab.gnome.org/GNOME/tracker/-/issues/317">#317</a></p>
+
+<p><em>Merge Requests</em>: <a href="https://gitlab.gnome.org/GNOME/tracker/-/merge_requests/446">!446</a></p>
+
+<h3 id="week-5">Week 5</h3>
+
+<p>Resolved all the threads, and marked the MR ready for merge. After few more changes MR was merged, and with this one out of two project goal was achieved.</p>
+
+<p><em>Issue</em>: <a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/issues/158">#158</a></p>
+
+<p><em>Merge Requests</em>: <a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/merge_requests/340">!340</a></p>
+
+<h3 id="week-6">Week 6</h3>
+
+<p>I began working towards my second milestone. Cloned the nautilus repository and spent few days understanding the codebase.  I was also working on my GUADEC presentation (hopefully will write a separate blog for it :-).</p>
+
+<h3 id="week-7">Week 7</h3>
+
+<p>Opened MR for search by creation time in nautilus, and while writing tests for nautilus discovered a bug and fixed it.</p>
+
+<p><em>Issues</em>: <a href="https://gitlab.gnome.org/GNOME/nautilus/-/issues/1933">#1933</a></p>
+
+<p><em>Merge Requests</em>: <a href="https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/693">!693</a>, <a href="https://gitlab.gnome.org/GNOME/nautilus/-/merge_requests/697">!697</a></p>]]></content><author><name>{&quot;twitter&quot;=&gt;&quot;nishit130&quot;}</name></author><category term="GSoC'21" /><summary type="html"><![CDATA[Weekly update of GSoC'21 project. Include's work done on week 4, 5, 6 and 7.]]></summary></entry><entry><title type="html">GSoC Project update part I</title><link href="https://nishitpatel.dev/gsoc'21/2021/06/29/gsoc-project-update.html" rel="alternate" type="text/html" title="GSoC Project update part I" /><published>2021-06-29T04:38:01+00:00</published><updated>2021-06-29T04:38:01+00:00</updated><id>https://nishitpatel.dev/gsoc'21/2021/06/29/gsoc-project-update</id><content type="html" xml:base="https://nishitpatel.dev/gsoc'21/2021/06/29/gsoc-project-update.html"><![CDATA[<p>This is a weekly update of my GSoC project.</p>
+
+<h3 id="week-1">Week 1</h3>
+
+<p>Following the proposed schedule, I began working on the first milestone, i.e Adding support for creation time in tracker-miners. While building the tracker-miner I discovered crashes in the indexer. After taking some help from mentors and debugging,
+It was found that a double-free bug in the indexer was causing the crash. As the piece of code was unused, it went unnoticed.</p>
+
+<p><em>Merge Requests</em>: <a href="https://gitlab.gnome.org/GNOME/tracker/-/merge_requests/440">!440</a></p>
+
+<h3 id="week-2">Week 2</h3>
+
+<p>During 2nd week, Most of the time was spent writing code. I was also working on resolving threads in the merge requests which were opened before GSoC.</p>
+
+<p><em>Merge Requests</em>: <a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/merge_requests/327">!327</a></p>
+
+<h3 id="week-3">Week 3</h3>
+
+<p>Opend Draft MR for the first milestone, and fixed some of the coverity warnings which were introduced after merging <a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/merge_requests/327">!327</a>.</p>
+
+<p><em>Merge Requests</em>:
+<a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/merge_requests/336">!336</a>,
+ <a href="https://gitlab.gnome.org/GNOME/tracker-miners/-/merge_requests/340">!340</a></p>]]></content><author><name>{&quot;twitter&quot;=&gt;&quot;nishit130&quot;}</name></author><category term="GSoC'21" /><summary type="html"><![CDATA[Weekly update of GSoC'21 project. Include's work done on week 1, 2 and 3.]]></summary></entry><entry><title type="html">Beginning my GSoC Journey</title><link href="https://nishitpatel.dev/gsoc'21/2021/05/31/start-of-gsoc-jouney.html" rel="alternate" type="text/html" title="Beginning my GSoC Journey" /><published>2021-05-31T04:38:01+00:00</published><updated>2021-05-31T04:38:01+00:00</updated><id>https://nishitpatel.dev/gsoc'21/2021/05/31/start-of-gsoc-jouney</id><content type="html" xml:base="https://nishitpatel.dev/gsoc'21/2021/05/31/start-of-gsoc-jouney.html"><![CDATA[<p><em>This was my reaction after finding out that I was selected for GSoC :)</em></p>
+
+<div style="text-align:center">
+<img src="https://media.giphy.com/media/b5LTssxCLpvVe/giphy.gif" />
+<p style="font-size: 15px;text-align:center">source: Giphy</p>
+</div>
+
+<p>I am starting a new blog series, for covering my GSoC’21 journey with <a href="https://www.gnome.org/" target="\_blank">GNOME Foundation</a>. This is going to be an introductory blog where I will talk about the project on which I’ll be working this summer. Before we get started let me introduce myself to the folks reading from the GNOME planet. I am Nishit Patel, an undergraduate Computer Engineering student from India.</p>
+
+<p>I began my pre GSoC journey back in November 2020 when I opened my first <a href="https://gitlab.gnome.org/GNOME/tracker/-/merge_requests/346">MR</a> in tracker project. It was a small bug fix in the README.md file which I came across while setting up my local environment. Later, I began keeping a watch on the #tracker IRC and used to ask maintainers for help whenever I was stuck at something. Maintainers were very helpful and polite with their prompt replies even if I was asking some stupid question that was already addressed somewhere in the documentation. One thing that I noticed is it is better to first google, and check the docs before asking the question as it saves the maintainers precious time, and you also get to learn something new in the process.</p>
+
+<h2 id="project-details">Project details</h2>
+
+<p>I will be working on the <a href="https://wiki.gnome.org/Projects/Tracker/WhatIsTracker">Tracker-miner</a> project which is an indexer, and also used for extracting the metadata from different file formats. Tracker currently doesn’t store the creation time in the database as it was historically not tracked on UNIX file systems, and it’s not part of <a href="https://www.gnu.org/software/coreutils/manual/html_node/File-timestamps.html#:~:text=28%20File%20timestamps,to%20the%20file's%20meta%2Dinformation.">POSIX specification</a>. However, Since <a href="https://kernelnewbies.org/Linux_4.11">kernel version 4.11</a> the new <a href="https://github.com/torvalds/linux/commit/a528d35">statx</a> system call provides the file creation timestamp. Based on this, the project aims to provide the support of storing file creation time in the tracker database and later, provide the <a href="https://gitlab.gnome.org/GNOME/nautilus/-/issues/1761">feature</a> of searching by creation time in Nautilus.</p>
+
+<p>I will be writing short posts as and when I get time in between so</p>
+
+<div style="text-align:center">
+<img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2UxcW9yejAyOThoZG40amZlYXJpejdkMDhzbnU4ZWtnZzRobmNvNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/IwAZ6dvvvaTtdI8SD5/giphy.gif" />
+<p style="font-size: 15px;text-align:center">source: Giphy</p>
+</div>]]></content><author><name>{&quot;twitter&quot;=&gt;&quot;nishit130&quot;}</name></author><category term="GSoC'21" /><summary type="html"><![CDATA[This is going to be an introductory blog where I will talk about the project on which I’ll be working this summer in GNOME Foundation.]]></summary></entry><entry><title type="html">Experience at KJSCE Hack 4.O</title><link href="https://nishitpatel.dev/kjsce-hack/2019/10/08/experience-at-kjsce-hack.html" rel="alternate" type="text/html" title="Experience at KJSCE Hack 4.O" /><published>2019-10-08T12:16:01+00:00</published><updated>2019-10-08T12:16:01+00:00</updated><id>https://nishitpatel.dev/kjsce-hack/2019/10/08/experience-at-kjsce-hack</id><content type="html" xml:base="https://nishitpatel.dev/kjsce-hack/2019/10/08/experience-at-kjsce-hack.html"><![CDATA[<p><img src="../../../../assets/img/eureka3.jpg" alt="eureka3.jpg" /></p>
+
+<p>In this blog, I will share my experience at <strong>KJSCE Hackathon 2019</strong>. first, let me explain what is a hackathon and if you already know than skip the next 5-6 lines.</p>
+
+<p>Hackathon’s are of a various type depending on time for example 12hr, 24hr, 48hr or they can be different by themes like hardware and software hackathons. They are generally development based event where you have to create a working product which aim’s to solve our day to day problem. Also it should be created within a time-bound given to you. It is a team-based event, generally a team of four. This much intro is enough for you to understand what is a hackathon, so lets start with my experience.</p>
+
+<p>It was a 24hr Hackathon organized by <a href="http://www.kjscecodecell.com">KJSCE Codecell</a>. My team name for the Hackathon was <strong>EUREKA</strong>, and the members were <em><a href="https://www.linkedin.com/in/nishit-patel-45a8b0136/">Nishit</a> (myself) , <a href="https://www.linkedin.com/in/manan-pandya-435215192/">Manan</a> , <a href="https://www.linkedin.com/in/ali-solanki-2a1227192/">Ali</a> and <a href="https://www.linkedin.com/in/pathik-ghugare-4b7b60191/">Pathik</a></em>. We were the only team from first year. As it was the first time we were participating in such event, so our goal was simple, we wanted to learn and connect with the people instead of racing for win.</p>
+
+<p>The Coding Period began on 5th Oct at noon and our idea was to make a Hospital Management System website which was named as Hospipro. Then next task was to select a good tech stack to create Hospipro. We all agreed upon to use Django framework as our main tech stack. I was working on the Backend Development for the Website, it includes tasks like creating a login page for the doctor, patient list view, updates patient profile and creating different database models. Manan was working on the Frontend his task includes of web-design. Ali was developing the android version of our website using Kotlin language. Pathik Was given the task of creating a logo’s, ppt’s etc required for final judging round.</p>
+
+<p>24hr seems to be lot of time but when we began with our work only then we realized its definelty not lot of time. Myself and my teammates were continuously coding for 24hrs straight day and night with just a nap of 2hrs. I enjoyed the mix of friendly as well as competetive enviroment of hackathon, and plan to participate in more such hackathons.</p>
+
+<p>Our product Hospipro included features like:</p>
+
+<ul>
+  <li>Secure Login Portal</li>
+  <li>Even when patients are unconscious we can scan the generated QR code from their IDs</li>
+  <li>The ability for doctors to update patients profile with their profile picture</li>
+  <li>The doctor can easily handle information of their patients in just one click</li>
+  <li>Patients can also have access to their medical history</li>
+</ul>
+
+<p><strong><em>Screenshots</em></strong>
+<img src="../../../../assets/img/home.png" alt="" />
+<img src="../../../../assets/img/login.png" alt="" /></p>
+
+<p>I noticed that most of the teams were using new and easy to build tech stack like Flask, nodejs etc for the backend, and during the judging round. I would like to suggest that, if you are planning to participate in your first hackathon then do make some pre-preparation regarding the idea and how you are going to implement it.</p>
+
+<p><a class="button" href="https://github.com/nishit130" style="background: #0366d6">Source Code of Hospipro  <svg width="16" height="16" class="icon  icon--github" role="img" alt="github"><title>github</title><use xlink:href="#github" fill="CurrentColor"></use></svg>
+</a></p>
+
+<p><strong>Images taken during Hackathon</strong></p>
+
+<p><a href="../../../../assets/img/feature.jpg"><img src="../../../../assets/img/feature.jpg" alt="Hackathon Image 1" /></a>
+<a href="../../../../assets/img/image2.jpeg"><img src="../../../../assets/img/image2.jpeg" alt="Hackathon Image 2" /></a></p>]]></content><author><name>{&quot;twitter&quot;=&gt;&quot;nishit130&quot;}</name></author><category term="KJSCE-Hack" /><summary type="html"><![CDATA[In this blog, I will share my experience at **KJSCE Hackathon 2019**. first, let me explain what is a hackathon and if you already know than skip the next 5-6 lines.]]></summary></entry></feed>
