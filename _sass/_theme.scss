@@ -81,10 +81,10 @@ a {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0.3rem 1rem;
+  padding: 0.15rem 1rem;
   
   @media (max-width: 640px) {
-    padding: 0.4rem 1rem;
+    padding: 0.2rem 1rem;
   }
 }
 
@@ -152,8 +152,9 @@ a {
 
 .nav-item {
   display: inline-block;
-  margin: 0 0.8rem;
-  padding: 0.4rem 0;
+  margin: 0 0.6rem;
+  padding: 0.2rem 0;
+  font-size: 0.85rem;
   font-weight: 500;
   position: relative;
   
@@ -1090,7 +1091,7 @@ input, button, select, textarea {
 // Semantic Layout Styles
 .hero-section {
   text-align: center;
-  padding: 2rem 0 4rem;
+  padding: 3rem 0 4rem;
   
   .hero-image-container {
     margin-bottom: 1.5rem;
@@ -1214,4 +1215,43 @@ input, button, select, textarea {
 
 .text-sm {
   font-size: 0.875rem;
+}
+
+// Blog listing and post content - smaller fonts
+.article--post,
+.post-list {
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.4rem;
+  }
+  
+  h3 {
+    font-size: 1.15rem;
+  }
+  
+  p, li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+  
+  .meta {
+    font-size: 0.8rem;
+  }
+  
+  .excerpt {
+    font-size: 0.9rem;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+    margin: 1.5rem auto;
+  }
 }
